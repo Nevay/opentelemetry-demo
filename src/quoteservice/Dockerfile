@@ -7,6 +7,7 @@ FROM php:8.3-cli as base
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions \
   && install-php-extensions \
+    ffi \
     opcache \
     pcntl \
     protobuf \
@@ -25,8 +26,6 @@ COPY ./src/quoteservice/composer.json .
 RUN composer install \
     --ignore-platform-reqs \
     --no-interaction \
-    --no-plugins \
-    --no-scripts \
     --no-dev \
     --prefer-dist
 
